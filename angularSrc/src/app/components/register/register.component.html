@@ -1,0 +1,25 @@
+<div class='container'>
+  <div class='row'>
+    <h1>Register</h1>
+    <div class='formAlignment'>
+      <form [formGroup]='registerForm'>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input class='form-control'type='text'formControlName='username' >
+          </div>
+          <div class="form-group">
+              <label for="username">Email</label>
+              <input class='form-control'type='text'formControlName='email' >
+            </div>
+          <div class="form-group">
+              <label for="username">Password</label>
+              <input class='form-control'type='password' formControlName="password" >
+            </div>
+          <div class='form-group'>
+              <button class='btn btn-lg btn-primary btn-block' type='button'
+               (click)='register()'>Submit</button>
+          </div>  
+        </form>
+      </div>
+  </div>
+</div>
