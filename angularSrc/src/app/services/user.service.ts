@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as moment from 'moment';
 
 
 
@@ -7,6 +8,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
+  Token : any
+  User : any
+
   constructor(private http: HttpClient){
 
   }
@@ -24,9 +28,48 @@ export class UserService {
     });
   }
   logout(){
+    this.Token = null;
+    this.User = null;
+    localStorage.clear();
     return this.http.get('http://127.0.0.1:3000/logout', {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+
+  storeUserData(token, user, expiresIn){
+    const expiresAt = moment().add(expiresIn,'second');
+    localStorage.setItem('id_token', token);
+    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('user', JSON.stringify(user));
+
+    this.Token = token;
+    this.User = user;
+  }
+
+  getProfile(){
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization':  this.Token
+      })
+    };
+    return this.http.get<any>('users/profile', httpOptions);
+  }
+
+  loadToken(){
+    const token = localStorage.getItem('id_token');
+    this.Token = token;
+  }
+
+  isLoggedIn(){
+    return moment().isBefore(this.getExpiration());
+  }
+
+  getExpiration() {
+    const expiration = localStorage.getItem("expires_at");
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
+}   
 }

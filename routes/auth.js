@@ -2,6 +2,8 @@ const express = require('express');
 const User = require('../models/users');
 const router = express.Router();
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const config = require('../config/database');
 
 router.post('/register', (req, res, next)=>{
     addToDB(req, res);
@@ -23,7 +25,7 @@ async function addToDB(req, res){
 }
 
 router.post('/login', (req, res, next)=>{
-    passport.authenticate('local', (err, user, info)=>{
+    passport.authenticate('local', {session: false}, (err, user, info)=>{
         if(err){
             console.log(err);
             return res.status(501).json(err);
@@ -32,19 +34,32 @@ router.post('/login', (req, res, next)=>{
             console.log(info);
             return res.status(501).json(info);
         }
-        req.logIn(user, (err)=>{
+        req.logIn(user, {session: false}, (err)=>{
             if(err){
-                console.log('37');
                 return res.status(501).json(err);
             }else{
-                return res.status(200).json({message: 'Login Success'});
+                const token = jwt.sign({data:user}, config.secret, {
+                    expiresIn: 604800 //1 week in seconds
+
+                });
+                res.status(200).json({
+                    success: true, 
+                    msg: 'You are now logged in! Welcome ' + user.username +'!',
+                    token: 'JWT ' + token, 
+                    expiresIn: 604800,
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        username: user.username,
+                        email: user.email
+                    }
+                });
             }
         });
     })(req, res, next)
 });
 
 router.get('/logout', function(req, res){
-    console.log('47');
     req.logout();
     res.redirect('/');
 });

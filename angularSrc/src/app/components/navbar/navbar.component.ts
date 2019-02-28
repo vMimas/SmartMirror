@@ -18,8 +18,7 @@ export class NavbarComponent implements OnInit {
    this.userService.logout().subscribe(
      data => {console.log(data); this.router.navigate(['/login'])},
      error => console.log(error)
-   );
-   
+   );  
   }
 
 }
