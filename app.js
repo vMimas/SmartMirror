@@ -47,8 +47,8 @@ app.get('/', (req, res) => {
     res.send('Made it to Root');
 });
 
+const port = 3000;
 
-
-app.listen('3000', ()=>{
-    console.log('App Running');
+app.listen(port, ()=>{
+    console.log(`App Running on port ${port}`);
 });
