@@ -1,5 +1,5 @@
 {
-  "name": "finalproject",
+  "name": "SmartMirror Final Project",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon app.js"
   },
-  "author": "James Hatfield",
+  "author": "James Hatfield, Lee Dempsey, Tyler Wartzok",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.4",
