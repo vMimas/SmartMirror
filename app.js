@@ -40,14 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/', authRoutes);
-
-
-app.get('/', (req, res) => {
-    res.send('Made it to Root');
-});
-
-
+app.use('/', authRoutes);   
 
 app.listen('3000', ()=>{
     console.log('App Running');

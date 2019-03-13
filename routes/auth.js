@@ -27,7 +27,7 @@ async function addToDB(req, res){
 router.post('/login', (req, res, next)=>{
     passport.authenticate('local', {session: false}, (err, user, info)=>{
         if(err){
-            console.log(err);
+            console.log('line 30' + err);
             return res.status(501).json(err);
         }
         if(!user){
@@ -45,7 +45,7 @@ router.post('/login', (req, res, next)=>{
                 res.status(200).json({
                     success: true, 
                     msg: 'You are now logged in! Welcome ' + user.username +'!',
-                    token: 'JWT ' + token, 
+                    token: 'bearer ' + token, 
                     expiresIn: 604800,
                     user: {
                         id: user._id,
@@ -62,6 +62,10 @@ router.post('/login', (req, res, next)=>{
 router.get('/logout', function(req, res){
     req.logout();
     res.redirect('/');
+});
+
+router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
+    return {user: req.user};
 });
 
 module.exports = router;

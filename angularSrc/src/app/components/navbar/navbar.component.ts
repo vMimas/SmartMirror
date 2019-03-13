@@ -16,9 +16,19 @@ export class NavbarComponent implements OnInit {
 
   logout(){
    this.userService.logout().subscribe(
-     data => {console.log(data); this.router.navigate(['/login'])},
+     data => {console.log(data); },
      error => console.log(error)
    );  
+   this.router.navigate(['/']);
+  }
+
+  loadDashboard(){
+    this.userService.getDashboard().subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
+    this.router.navigate(['/dashboard']);
+    document.querySelector('nav').classList.add('.d-none');
   }
 
 }

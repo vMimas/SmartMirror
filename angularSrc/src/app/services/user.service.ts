@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
 
@@ -15,13 +15,13 @@ export class UserService {
 
   }
   register(body : any){
-    return this.http.post('http://127.0.0.1:3000/register', body, {
+    return this.http.post<any>('http://127.0.0.1:3000/register', body, {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
   login(body : any){
-    return this.http.post('http://127.0.0.1:3000/login', body, {
+    return this.http.post<any>('http://127.0.0.1:3000/login', body, {
       observe: 'body',
       withCredentials: true,
       headers: new HttpHeaders().append('Content-Type', 'application/json')
@@ -47,7 +47,7 @@ export class UserService {
     this.User = user;
   }
 
-  getProfile(){
+  getDashboard(){
     this.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -55,11 +55,12 @@ export class UserService {
         'Authorization':  this.Token
       })
     };
-    return this.http.get<any>('users/profile', httpOptions);
+    return this.http.get<any>('http://127.0.0.1:3000/dashboard', httpOptions);
   }
 
   loadToken(){
     const token = localStorage.getItem('id_token');
+    console.log(token);
     this.Token = token;
   }
 
@@ -71,5 +72,5 @@ export class UserService {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
-}   
+} 
 }
