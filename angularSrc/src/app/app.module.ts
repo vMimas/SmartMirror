@@ -10,6 +10,8 @@ import { LandingComponent } from './components/landing/landing.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './guards/authguard.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    LandingComponent
+    LandingComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

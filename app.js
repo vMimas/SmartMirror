@@ -35,20 +35,16 @@ app.use(require("express-session")({
         secure: false
     }
 }));
+
 require('./passport-config');
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use('/', authRoutes);
-
-
-app.get('/', (req, res) => {
-    res.send('Made it to Root');
-});
 
 const port = 3000;
 
 app.listen(port, ()=>{
     console.log(`App Running on port ${port}`);
 });
+
