@@ -4,9 +4,31 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const mongoose = require('mongoose');
+
+//Setup UsersDB model
+const UsersDB = mongoose.model('users', {
+    email: {type:String, require:true},
+    username: {type:String, require:true},
+    password: {type:String, require:true},
+
+});
 
 router.post('/register', (req, res, next)=>{
-    addToDB(req, res);
+
+  if(req.body.password.length < 6){
+    console.log("Password must be at least six characters long.");
+  } else {
+  //check if username is taken in UsersDB
+    UsersDB.findOne({username: req.body.username})
+      .then(user => {
+        if(user){
+          console.log("username is taken");
+        } else {
+          addToDB(req, res);
+        }
+      });
+    }
 });
 
 async function addToDB(req, res){
@@ -43,9 +65,9 @@ router.post('/login', (req, res, next)=>{
 
                 });
                 res.status(200).json({
-                    success: true, 
+                    success: true,
                     msg: 'You are now logged in! Welcome ' + user.username +'!',
-                    token: 'bearer ' + token, 
+                    token: 'bearer ' + token,
                     expiresIn: 604800,
                     user: {
                         id: user._id,
