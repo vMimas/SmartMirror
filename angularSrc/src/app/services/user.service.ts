@@ -11,15 +11,15 @@ export class UserService {
   Token : any
   User : any
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient){ }
 
-  }
   register(body : any){
     return this.http.post<any>('http://127.0.0.1:3000/register', body, {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+
   login(body : any){
     return this.http.post<any>('http://127.0.0.1:3000/login', body, {
       observe: 'body',
@@ -27,11 +27,12 @@ export class UserService {
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+
   logout(){
     this.Token = null;
     this.User = null;
     localStorage.clear();
-    return this.http.get('http://127.0.0.1:3000/logout', {
+    return this.http.get('http://127.0.0.1:3000/', {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
@@ -56,6 +57,17 @@ export class UserService {
       })
     };
     return this.http.get<any>('http://127.0.0.1:3000/dashboard', httpOptions);
+  }
+
+  getSettings(){
+    this.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization':  this.Token
+      })
+    };
+    return this.http.get<any>('http://127.0.0.1:3000/settings', httpOptions);
   }
 
   loadToken(){

@@ -90,4 +90,8 @@ router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, r
     return {user: req.user};
 });
 
+router.get('/settings', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
+    return {user: req.user};
+});
+
 module.exports = router;

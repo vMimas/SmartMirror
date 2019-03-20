@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
    this.userService.logout().subscribe(
      data => {console.log(data); },
      error => console.log(error)
-   );  
+   );
    this.router.navigate(['/']);
   }
 
@@ -28,6 +28,15 @@ export class NavbarComponent implements OnInit {
       error => console.log(error)
     );
     this.router.navigate(['/dashboard']);
+    document.querySelector('nav').classList.add('.d-none');
+  }
+
+  loadSettings(){
+    this.userService.getSettings().subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
+    this.router.navigate(['/settings']);
     document.querySelector('nav').classList.add('.d-none');
   }
 
