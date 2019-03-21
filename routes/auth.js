@@ -19,15 +19,26 @@ router.post('/register', (req, res, next)=>{
   if(req.body.password.length < 6){
     console.log("Password must be at least six characters long.");
   } else {
-  //check if username is taken in UsersDB
+
+    //check if username is taken in UsersDB
     UsersDB.findOne({username: req.body.username})
       .then(user => {
         if(user){
           console.log("username is taken");
         } else {
-          addToDB(req, res);
+
+          //check if email is taken in UsersDB
+          UsersDB.findOne({email: req.body.email})
+            .then(user => {
+              if(user){
+                console.log("Email is taken");
+              } else {
+                addToDB(req, res);
+              }
+            });  // End findOne 'email'
         }
-      });
+      }); // End findOne 'username'
+      
     }
 });
 
