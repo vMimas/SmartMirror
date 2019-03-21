@@ -32,10 +32,7 @@ export class UserService {
     this.Token = null;
     this.User = null;
     localStorage.clear();
-    return this.http.get('http://127.0.0.1:3000/', {
-      observe: 'body',
-      headers: new HttpHeaders().append('Content-Type', 'application/json')
-    });
+    return this.http.get('http://127.0.0.1:3000/');
   }
 
   storeUserData(token, user, expiresIn){
