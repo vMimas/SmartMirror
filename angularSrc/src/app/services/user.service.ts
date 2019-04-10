@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
 
-
+const appUrl = 'http://127.0.0.1:3000/'
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,14 @@ export class UserService {
   constructor(private http: HttpClient){ }
 
   register(body : any){
-    return this.http.post<any>('http://127.0.0.1:3000/register', body, {
+    return this.http.post<any>(appUrl + 'register', body, {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
 
   login(body : any){
-    return this.http.post<any>('http://127.0.0.1:3000/login', body, {
+    return this.http.post<any>(appUrl + 'login', body, {
       observe: 'body',
       withCredentials: true,
       headers: new HttpHeaders().append('Content-Type', 'application/json')
@@ -32,7 +32,7 @@ export class UserService {
     this.Token = null;
     this.User = null;
     localStorage.clear();
-    return this.http.get('http://127.0.0.1:3000/');
+    return this.http.get(appUrl);
   }
 
   storeUserData(token, user, expiresIn){
@@ -53,7 +53,7 @@ export class UserService {
         'Authorization':  this.Token
       })
     };
-    return this.http.get<any>('http://127.0.0.1:3000/dashboard', httpOptions);
+    return this.http.get<any>(appUrl + 'dashboard', httpOptions);
   }
 
   getSettings(){
@@ -64,7 +64,7 @@ export class UserService {
         'Authorization':  this.Token
       })
     };
-    return this.http.get<any>('http://127.0.0.1:3000/settings', httpOptions);
+    return this.http.get<any>(appUrl + 'settings', httpOptions);
   }
 
   loadToken(){
