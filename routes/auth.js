@@ -7,12 +7,7 @@ const config = require('../config/database');
 const mongoose = require('mongoose');
 
 //Setup UsersDB model
-const UsersDB = mongoose.model('users', {
-    email: {type:String, require:true},
-    username: {type:String, require:true},
-    password: {type:String, require:true},
-
-});
+let UsersDB = require('../models/users');
 
 router.post('/register', (req, res, next)=>{
 
@@ -38,7 +33,7 @@ router.post('/register', (req, res, next)=>{
             });  // End findOne 'email'
         }
       }); // End findOne 'username'
-      
+
     }
 });
 
