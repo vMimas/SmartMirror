@@ -126,7 +126,7 @@ router.get('/user/:id', function(req, res) {
         })//END '.exec'
     });
 
-/**router.put('/user/:id', function(req, res){
+router.put('/user/:id', function(req, res){
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
     {
@@ -134,15 +134,29 @@ router.get('/user/:id', function(req, res) {
     },
     {
       new: true
-      //if 'true' return updatedUser, if 'false', return original video
     },
     function(err, updatedUser){
-      // has either 'err'or or updatedUser
       if(err){
         res.send("Error updating user");
       } else {
         res.json(updatedUser);
       }
+    }
+  )
+});
+
+/**
+router.put('/user/:id', function(req, res){
+  console.log('Update a user');
+  UsersDB.findByIdAndUpdate(req.params.id, req.body,
+    function(err, updatedUser){
+      // has either 'err'or or updatedUser
+        user = User({
+            email: req.body.email,
+            username: req.body.username,
+            //password: User.hashPassword(req.body.password)
+        });
+        res.json(user);
     }
   )
 });**/
