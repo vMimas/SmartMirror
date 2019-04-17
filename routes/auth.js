@@ -100,6 +100,7 @@ router.get('/settings', passport.authenticate('jwt', {session: false}), (req, re
     return {user: req.user};
 });
 
+//get all users
 router.get('/user', function(req, res, next){
     console.log('Get request for all users');
     UsersDB.find({})
@@ -112,7 +113,7 @@ router.get('/user', function(req, res, next){
     });
 })
 
-//get users
+//get user by id
 router.get('/user/:id', function(req, res) {
       console.log('Get reqest for single user');
 
@@ -160,5 +161,17 @@ router.put('/user/:id', function(req, res){
     }
   )
 });**/
+
+//delete user
+router.delete('/user/:id', function(req, res, next) {
+  UsersDB.findByIdAndRemove(req.params.id, req.body, function (err, deletedUser) {
+    if (err){
+      res.send("Error deleting user")
+    } else {
+      res.json(deletedUser);
+    }
+  });
+});
+
 
 module.exports = router;
