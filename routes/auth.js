@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const mongoose = require('mongoose');
 
-//Setup UsersDB model
+//Setup UsersDB
 let UsersDB = require('../models/users');
 
 router.post('/register', (req, res, next)=>{
@@ -41,7 +41,8 @@ async function addToDB(req, res){
     let user = new User({
         email: req.body.email,
         username: req.body.username,
-        password: User.hashPassword(req.body.password)
+        password: User.hashPassword(req.body.password),
+        message: `Hello, ${req.body.username}`
     });
 
     try{
@@ -100,7 +101,7 @@ router.get('/settings', passport.authenticate('jwt', {session: false}), (req, re
     return {user: req.user};
 });
 
-//get all users
+//get all users as json object
 router.get('/user', function(req, res, next){
     console.log('Get request for all users');
     UsersDB.find({})
@@ -127,11 +128,13 @@ router.get('/user/:id', function(req, res) {
         })//END '.exec'
     });
 
-router.put('/user/:id', function(req, res){
+
+//update user
+/**router.put('/user/:id', function(req, res){
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
     {
-      $set: {email: req.body.email, username: req.body.username}
+      $set: {email: req.body.email, username: req.body.username, password: User.hashPassword(req.body.password)}
     },
     {
       new: true
@@ -144,23 +147,43 @@ router.put('/user/:id', function(req, res){
       }
     }
   )
-});
+});**/
 
-/**
 router.put('/user/:id', function(req, res){
   console.log('Update a user');
-  UsersDB.findByIdAndUpdate(req.params.id, req.body,
+  //check if username is taken in UsersDB
+  UsersDB.findOne({username: req.body.username})
+    .then(user => {
+
+        //check if email is taken in UsersDB
+        UsersDB.findOne({email: req.body.email})
+          .then(user => {
+            if(user){
+              console.log("Email is taken");
+            } else {
+              updateDB(req, res);
+            }
+          });  // End findOne 'email'
+    }); // End findOne 'username'
+});
+
+async function updateDB(req, res){
+  await UsersDB.findByIdAndUpdate(req.params.id,
+    {
+      $set: {email: req.body.email, username: req.body.username, password: User.hashPassword(req.body.password)}
+    },
+    {
+      new: true
+    },
     function(err, updatedUser){
-      // has either 'err'or or updatedUser
-        user = User({
-            email: req.body.email,
-            username: req.body.username,
-            //password: User.hashPassword(req.body.password)
-        });
-        res.json(user);
+      if(err){
+        res.send("Error updating user");
+      } else {
+        res.json(updatedUser);
+      }
     }
   )
-});**/
+}
 
 //delete user
 router.delete('/user/:id', function(req, res, next) {
