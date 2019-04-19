@@ -99,6 +99,7 @@ router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, r
 
 router.get('/settings', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
     return {user: req.user};
+    //res.json({user: req.user});
 });
 
 //get all users as json object

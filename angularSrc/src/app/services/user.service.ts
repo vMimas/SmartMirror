@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import * as moment from 'moment';
 
 const appUrl = 'http://127.0.0.1:3000/'
@@ -82,4 +84,16 @@ export class UserService {
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
+
+  //getUser object
+  getUser(){
+    return JSON.parse(localStorage["user"]);
+  }
+
+  deleteUser() {
+    const id = this.getUser().id;
+    console.log(id);
+    return this.http.delete<any>(appUrl + 'user/' + id);
+  }
+
 }
