@@ -5,3 +5,12 @@ export class User {
   password:string;
   message:string;
 }
+/** EXAMPLE CODE FOR IMPLEMENTATION
+  user : User;
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit() {
+    this.user = this.userService.getUser();
+  }
+**/

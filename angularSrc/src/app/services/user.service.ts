@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 import * as moment from 'moment';
 
@@ -71,7 +72,7 @@ export class UserService {
 
   loadToken(){
     const token = localStorage.getItem('id_token');
-    console.log(token);
+    //console.log(token);
     this.Token = token;
   }
 
@@ -88,6 +89,23 @@ export class UserService {
   //getUser object
   getUser(){
     return JSON.parse(localStorage["user"]);
+  }
+
+  updateUser(user: User) : Observable<any>{
+    this.loadToken();
+
+    //update localstorage with new user information
+    localStorage.setItem('user', JSON.stringify(user));
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        //'Authorization':  this.Token
+      })
+    };
+        console.log('user.service: ' + JSON.stringify(user));
+        console.log('User id: ' + user.id);
+        return this.http.put(appUrl + 'user/' + user.id, user, httpOptions);
   }
 
   deleteUser() {

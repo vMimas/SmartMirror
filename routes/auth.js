@@ -132,11 +132,11 @@ router.get('/user/:id', function(req, res) {
 
 
 //update user
-/**router.put('/user/:id', function(req, res){
+router.put('/user/:id', function(req, res, next){
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
     {
-      $set: {email: req.body.email, username: req.body.username, password: User.hashPassword(req.body.password)}
+      $set: {email: req.body.email, username: req.body.username, message: req.body.message}
     },
     {
       new: true
@@ -145,13 +145,14 @@ router.get('/user/:id', function(req, res) {
       if(err){
         res.send("Error updating user");
       } else {
+        console.log("Success updating user!")
         res.json(updatedUser);
       }
     }
   )
-});**/
+});
 
-router.put('/user/:id', function(req, res){
+/**router.put('/user/:id', function(req, res){
   console.log('Update a user');
   //check if username is taken in UsersDB
   UsersDB.findOne({username: req.body.username})
@@ -167,7 +168,7 @@ router.put('/user/:id', function(req, res){
             }
           });  // End findOne 'email'
     }); // End findOne 'username'
-});
+});**/
 
 async function updateDB(req, res){
   await UsersDB.findByIdAndUpdate(req.params.id,
