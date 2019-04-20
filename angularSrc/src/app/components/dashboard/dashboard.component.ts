@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
 import { Feed } from '../../services/feed.model';
@@ -11,7 +12,7 @@ import { Feed } from '../../services/feed.model';
 })
 export class DashboardComponent implements OnInit {
   private id : any = '';
-  public username : string = '';
+  public message : string = '';
   public feeds: Feed[] = [];
 
   bbc: string = "http://feeds.bbci.co.uk/news/rss.xml?edition=us";
@@ -20,12 +21,11 @@ export class DashboardComponent implements OnInit {
   wallStreet: string = "https://feeds.a.dj.com/rss/RSSWorldNews.xml";
   WPPolitics: string = "http://feeds.washingtonpost.com/rss/politics";
 
-  
-  constructor(private userService: UserService, private feed: FeedService) { 
-  }
+
+  constructor(private userService: UserService, private feed: FeedService, private router: Router) { }
 
   ngOnInit() {
-    this.username = JSON.parse(localStorage.getItem('user')).username;
+    this.message = JSON.parse(localStorage.getItem('user')).message;
     this.id = setInterval(this.getDateAndTime, 1000);
     this.feed.getFeeds(this.bbc)
     .subscribe(
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
       'July', 'August', 'October', 'November', 'December'
     ];
     let currentDate : Date = new Date();
-    let date = [months[currentDate.getMonth()], ", ", 
+    let date = [months[currentDate.getMonth()], ", ",
                 currentDate.getDate(), " ",
                 currentDate.getFullYear()].join("");
     let hours : number = currentDate.getHours();
@@ -64,5 +64,10 @@ export class DashboardComponent implements OnInit {
     doc.innerHTML += time;
     doc.appendChild(document.createElement('br'));
     doc.innerHTML += date;
+  }
+
+  loadSettings(){
+    this.userService.getSettings().subscribe();
+    this.router.navigate(['/settings']);
   }
 }

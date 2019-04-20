@@ -10,9 +10,15 @@ div{
     width: 100vw;
 }
 
+.glyphicon-menu-hamburger{
+  font-size:28px;
+  color:white;
+  z-index:1;
+}
+
 #date{
     animation-name: slide-in;
-    animation-duration: 2s; 
+    animation-duration: 2s;
     animation-delay: 4s;
     padding-left: 20px;
     transform: translateX(100%);
@@ -54,7 +60,7 @@ li{
     50% { opacity: 1; }
     100% { opacity: 0; }
   }
-  
+
   @keyframes fade-in-out {
     0% { opacity: 0; }
     50% { opacity: 1; }

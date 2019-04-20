@@ -11,6 +11,7 @@ import { User } from '../../models/user';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  private settingsSaved:boolean = false;
   private editUsername:boolean = false;
   private editEmail:boolean = false;
   private editMessage:boolean = false;
@@ -27,6 +28,7 @@ export class SettingsComponent implements OnInit {
     this.userService.deleteUser().subscribe();
     this.userService.logout();
     this.router.navigate(['/']);
+    console.log('Account deleted.');
   }
 
   updateUser(){
@@ -38,17 +40,22 @@ export class SettingsComponent implements OnInit {
     //forward edits to backend
     this.userService.updateUser(this.user)
       .subscribe();
+    this.settingsSaved = true;
+    console.log('Account updated.');
   }
 
   //track edits
   onUsernameClick(){
     this.editUsername = true;
+    this.settingsSaved = false;
   }
   onEmailClick(){
     this.editEmail = true;
+    this.settingsSaved = false;
   }
   onMessageClick(){
     this.editMessage = true;
+    this.settingsSaved = false;
   }
 
 }

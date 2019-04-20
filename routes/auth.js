@@ -4,31 +4,35 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const mongoose = require('mongoose');
+
+//Setup UsersDB. DON'T DELETE.
+let UsersDB = require('../models/users');
 
 router.post('/register', (req, res, next)=>{
-
   if(req.body.password.length < 6){
     console.log("Password must be at least six characters long.");
   } else {
 
-    //check if username is taken in UsersDB
+    //MONGO: check if username is taken in UsersDB
     UsersDB.findOne({username: req.body.username})
       .then(user => {
         if(user){
           console.log("username is taken");
-        } else {
 
-          //check if email is taken in UsersDB
+        } else {
+          //MONGO: check if email is taken in UsersDB
           UsersDB.findOne({email: req.body.email})
             .then(user => {
               if(user){
                 console.log("Email is taken");
+
               } else {
                 addToDB(req, res);
               }
-            });  // End findOne 'email'
+            });  // END findOne 'email'
         }
-      }); // End findOne 'username'
+      }); // END findOne 'username'
 
     }
 });
@@ -86,8 +90,8 @@ router.post('/login', (req, res, next)=>{
 });
 
 router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
+  req.logout();
+  res.redirect('/');
 });
 
 router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
@@ -95,39 +99,40 @@ router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, r
 });
 
 router.get('/settings', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
-    return {user: req.user};
-    //res.json({user: req.user});
+  return {user: req.user};
+  //res.json({user: req.user});
 });
 
-//get all users as json object
+//GET all users as json object
+//FOR TESTING PURPOSES
 router.get('/user', function(req, res, next){
-    console.log('Get request for all users');
-    UsersDB.find({})
+  console.log('Get request for all users');
+  UsersDB.find({})
     .exec(function(err, user){
-        if(err){
-            res.send("Error retrieving users");
-        }else{
-            res.json(user);
-        }
+      if(err){
+          res.send("Error retrieving users");
+      }else{
+          res.json(user);
+      }
     });
 })
 
-//get user by id
+//GET user by id
 router.get('/user/:id', function(req, res) {
-      console.log('Get reqest for single user');
+  console.log('Get reqest for single user');
 
-      UsersDB.findById(req.params.id)
-        .exec(function(err, user){
-          if (err){
-            console.log("Error retrieving user");
-          } else {
-            res.json(user);
-          }
-        })//END '.exec'
-    });
+  UsersDB.findById(req.params.id)
+    .exec(function(err, user){
+      if (err){
+        console.log("Error retrieving user");
+      } else {
+        res.json(user);
+      }
+    })//END '.exec'
+});
 
 
-//update user
+//UPDATE user
 router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
@@ -148,7 +153,7 @@ router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, re
   )
 });
 
-//delete user
+//DELETE user
 router.delete('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   UsersDB.findByIdAndRemove(req.params.id, req.body, function (err, deletedUser) {
     if (err){
