@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FeedService } from '../../services/feed.service';
-import { Feed } from '../../services/feed.model';
+import { Feed } from '../../models/feed.model';
 
 
 @Component({
@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit {
       'July', 'August', 'October', 'November', 'December'
     ];
     let currentDate : Date = new Date();
-    let date = [months[currentDate.getMonth()], ", ", 
-                currentDate.getDate(), " ",
+    let date = [months[currentDate.getMonth()], " ",
+                currentDate.getDate(), ", ",
                 currentDate.getFullYear()].join("");
     let hours : number = currentDate.getHours();
     hours = hours;
