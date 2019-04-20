@@ -1,6 +1,9 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientJsonpModule } from '@angular/common/http';
+import {MomentPipe} from './services/moment.service';
+import {  FahrenheitPipe } from './services/fahrenheit.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -13,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/authguard.service';
 import { SettingsComponent } from './components/settings/settings.component';
+import { WeatherTileComponent } from './components/weather-tile/weather-tile.component';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -22,14 +27,18 @@ import { SettingsComponent } from './components/settings/settings.component';
     RegisterComponent,
     LandingComponent,
     DashboardComponent,
-    SettingsComponent
+    SettingsComponent,
+    WeatherTileComponent,
+    FahrenheitPipe,
+    MomentPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
