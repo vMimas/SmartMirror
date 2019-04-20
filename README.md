@@ -1,11 +1,13 @@
 # SmartMirror
 
-Reminder: run `npm install` to install dependencies in the root folder. Repeat in `/angularSrc`.
+## Setup
 
-NOTE: `./node_modules/` does not belong in git commits.
+Run `npm install` to install dependencies in the root folder. Repeat in `./angularSrc`.
 
-## Development server
+## Run Development Servers
 
-Run `npm run serve` for a dev server (`node app.js` works too),
+Start MongoDB locally.
 
-Run `npm start` in `/angularSrc/`. Navigate to `http://localhost:4200/`.
+Run `npm run serve` for a dev server (`node app.js` works too).
+
+Open a new terminal and run `npm start` or `ng serve` in `./angularSrc`. Navigate to `http://localhost:4200/`.
