@@ -132,7 +132,7 @@ router.get('/user/:id', function(req, res) {
 
 
 //update user
-router.put('/user/:id', function(req, res, next){
+router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
     {
@@ -152,52 +152,16 @@ router.put('/user/:id', function(req, res, next){
   )
 });
 
-/**router.put('/user/:id', function(req, res){
-  console.log('Update a user');
-  //check if username is taken in UsersDB
-  UsersDB.findOne({username: req.body.username})
-    .then(user => {
-
-        //check if email is taken in UsersDB
-        UsersDB.findOne({email: req.body.email})
-          .then(user => {
-            if(user){
-              console.log("Email is taken");
-            } else {
-              updateDB(req, res);
-            }
-          });  // End findOne 'email'
-    }); // End findOne 'username'
-});**/
-
-async function updateDB(req, res){
-  await UsersDB.findByIdAndUpdate(req.params.id,
-    {
-      $set: {email: req.body.email, username: req.body.username, password: User.hashPassword(req.body.password)}
-    },
-    {
-      new: true
-    },
-    function(err, updatedUser){
-      if(err){
-        res.send("Error updating user");
-      } else {
-        res.json(updatedUser);
-      }
-    }
-  )
-}
-
 //delete user
-router.delete('/user/:id', function(req, res, next) {
+router.delete('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   UsersDB.findByIdAndRemove(req.params.id, req.body, function (err, deletedUser) {
     if (err){
       res.send("Error deleting user")
     } else {
+      console.log("Success deleting user.");
       res.json(deletedUser);
     }
   });
 });
-
 
 module.exports = router;

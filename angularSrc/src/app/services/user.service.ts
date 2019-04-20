@@ -86,7 +86,7 @@ export class UserService {
     return moment(expiresAt);
   }
 
-  //getUser object
+  //getUser object from localStorage
   getUser(){
     return JSON.parse(localStorage["user"]);
   }
@@ -100,18 +100,25 @@ export class UserService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        //'Authorization':  this.Token
+        'Authorization':  this.Token
       })
     };
-        console.log('user.service: ' + JSON.stringify(user));
-        console.log('User id: ' + user.id);
-        return this.http.put(appUrl + 'user/' + user.id, user, httpOptions);
+
+    //send updated user to backend
+    return this.http.put(appUrl + 'user/' + user.id, user, httpOptions);
   }
 
   deleteUser() {
     const id = this.getUser().id;
-    console.log(id);
-    return this.http.delete<any>(appUrl + 'user/' + id);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization':  this.Token
+      })
+    };
+
+    return this.http.delete<any>(appUrl + 'user/' + id, httpOptions);
   }
 
 }
