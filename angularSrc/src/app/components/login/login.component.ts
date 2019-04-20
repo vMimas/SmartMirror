@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   login(){
     this.userService.login(JSON.stringify(this.loginForm.value))
     .subscribe(data => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
         this.userService.storeUserData(data.token, data.user, data.expiresIn);
       });
   }

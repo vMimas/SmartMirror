@@ -16,10 +16,10 @@ export class NavbarComponent implements OnInit {
 
   logout(){
    this.userService.logout().subscribe(
-     data => {console.log(data); },
-     error => console.log(error)
+     data => {console.log("Data: " + data); },
+     error => console.log("Error: " + error)
    );  
-   this.router.navigate(['/']);
+   this.router.navigate(['/login']);
   }
 
   loadDashboard(){

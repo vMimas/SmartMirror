@@ -8,7 +8,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/authguard.service';
@@ -29,7 +28,7 @@ import { AuthGuard } from './guards/authguard.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserService, AuthGuard],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

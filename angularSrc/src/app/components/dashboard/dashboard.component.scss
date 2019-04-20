@@ -1,5 +1,68 @@
+div{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
 .mainDiv{
     background-color: black; 
     height: 100vh;
     width: 100vw;
+    padding-left: 10px;
+    font-size: 70px;
 }
+
+#date{
+    animation-name: slide-in;
+    animation-duration: 2s; 
+    animation-delay: 4s;
+    padding-left: 20px;
+    transform: translateX(100%);
+    animation-fill-mode: forwards;
+}
+
+#welcome{
+    text-align: center;
+    position: relative;
+    bottom: 60vh;
+    font-size: 80px;
+    -webkit-animation: fade-in-out 4s linear forwards;
+    animation: fade-in-out 4s linear forwards;
+}
+
+.feed, ul{
+    list-style: none;
+    position: relative;
+    bottom: 20vh;
+}
+
+li{
+    padding-bottom: 10px;
+}
+
+@for $i from 1 through 5 {
+    li:nth-child(#{$i}) {
+        -moz-animation: slide-in 1s ease-in-out (($i/2)+5s) forwards;
+        -webkit-animation: slide-in 1s ease-in-out (($i/2)+5s) forwards;
+        -o-animation: slide-in 1s ease-in-out (($i/2)+5s) forwards;
+        animation: slide-in 1s ease-in-out (($i/2)+5s) forwards;
+        transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes fade-in-out {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes fade-in-out {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes slide-in{
+      0% {transform: translateX(100%)}
+      100% {transform: translateX(0)}
+  }

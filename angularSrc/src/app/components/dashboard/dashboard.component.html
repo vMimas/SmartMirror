@@ -1,2 +1,9 @@
 <div class="mainDiv">
+    <div id="date"></div>
+</div>
+<div id="welcome" >Welcome {{this.username}}</div>
+<div class="feed" >
+    <ul>
+        <li *ngFor="let element of feeds" class="slide" ><strong>{{element.title}}:</strong> {{element.description}}</li>
+    </ul>
 </div>

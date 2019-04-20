@@ -4,15 +4,6 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-const mongoose = require('mongoose');
-
-//Setup UsersDB model
-const UsersDB = mongoose.model('users', {
-    email: {type:String, require:true},
-    username: {type:String, require:true},
-    password: {type:String, require:true},
-
-});
 
 router.post('/register', (req, res, next)=>{
 

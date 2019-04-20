@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class UserService {
   Token : any
-  User : any
+  public User : any
 
   constructor(private http: HttpClient){
 
@@ -60,7 +60,6 @@ export class UserService {
 
   loadToken(){
     const token = localStorage.getItem('id_token');
-    console.log(token);
     this.Token = token;
   }
 
