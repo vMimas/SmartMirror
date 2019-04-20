@@ -7,8 +7,9 @@
             <ul class="nav navbar-nav navbar-right">
                     <li *ngIf='!userService.isLoggedIn()'><a routerLink="/login" routerLinkActive="active">Login</a></li>
                     <li *ngIf='!userService.isLoggedIn()'><a routerLink="/register" routerLinkActive="active">Sign Up</a></li>
-                    <li *ngIf='userService.isLoggedIn()'><a role='button' (click)='loadDashboard()'>Dashboard</a></li>
                     <li *ngIf='userService.isLoggedIn()'><a role='button' (click)=logout()>Logout</a></li>
+                    <li *ngIf='userService.isLoggedIn()'><a role='button' (click)='loadSettings()'>Settings</a></li>
+                    <li *ngIf='userService.isLoggedIn()'><a role='button' (click)='loadDashboard()'>Dashboard</a></li>
            </ul>
         </div>
     </div>

@@ -10,15 +10,26 @@ router.post('/register', (req, res, next)=>{
   if(req.body.password.length < 6){
     console.log("Password must be at least six characters long.");
   } else {
-  //check if username is taken in UsersDB
+
+    //check if username is taken in UsersDB
     UsersDB.findOne({username: req.body.username})
       .then(user => {
         if(user){
           console.log("username is taken");
         } else {
-          addToDB(req, res);
+
+          //check if email is taken in UsersDB
+          UsersDB.findOne({email: req.body.email})
+            .then(user => {
+              if(user){
+                console.log("Email is taken");
+              } else {
+                addToDB(req, res);
+              }
+            });  // End findOne 'email'
         }
-      });
+      }); // End findOne 'username'
+
     }
 });
 
@@ -26,7 +37,8 @@ async function addToDB(req, res){
     let user = new User({
         email: req.body.email,
         username: req.body.username,
-        password: User.hashPassword(req.body.password)
+        password: User.hashPassword(req.body.password),
+        message: `Hello, ${req.body.username}`
     });
 
     try{
@@ -64,7 +76,8 @@ router.post('/login', (req, res, next)=>{
                         id: user._id,
                         name: user.name,
                         username: user.username,
-                        email: user.email
+                        email: user.email,
+                        message: user.message,
                     }
                 });
             }
@@ -79,6 +92,72 @@ router.get('/logout', function(req, res){
 
 router.get('/dashboard', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
     return {user: req.user};
+});
+
+router.get('/settings', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
+    return {user: req.user};
+    //res.json({user: req.user});
+});
+
+//get all users as json object
+router.get('/user', function(req, res, next){
+    console.log('Get request for all users');
+    UsersDB.find({})
+    .exec(function(err, user){
+        if(err){
+            res.send("Error retrieving users");
+        }else{
+            res.json(user);
+        }
+    });
+})
+
+//get user by id
+router.get('/user/:id', function(req, res) {
+      console.log('Get reqest for single user');
+
+      UsersDB.findById(req.params.id)
+        .exec(function(err, user){
+          if (err){
+            console.log("Error retrieving user");
+          } else {
+            res.json(user);
+          }
+        })//END '.exec'
+    });
+
+
+//update user
+router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
+  console.log('Update a user');
+  UsersDB.findByIdAndUpdate(req.params.id,
+    {
+      $set: {email: req.body.email, username: req.body.username, message: req.body.message}
+    },
+    {
+      new: true
+    },
+    function(err, updatedUser){
+      if(err){
+        res.send("Error updating user");
+      } else {
+        console.log("Success updating user!")
+        res.json(updatedUser);
+      }
+    }
+  )
+});
+
+//delete user
+router.delete('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
+  UsersDB.findByIdAndRemove(req.params.id, req.body, function (err, deletedUser) {
+    if (err){
+      res.send("Error deleting user")
+    } else {
+      console.log("Success deleting user.");
+      res.json(deletedUser);
+    }
+  });
 });
 
 module.exports = router;
