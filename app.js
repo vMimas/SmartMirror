@@ -19,11 +19,12 @@ mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
 });
 
+app.use('/', authRoutes);
 app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyparser.json());
 app.use(cors({
     origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
     credentials: true
@@ -45,9 +46,7 @@ require('./passport-config');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', authRoutes);
-
-app.listen(port, host, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log(`App Running on port ${port}`);
 });
 
