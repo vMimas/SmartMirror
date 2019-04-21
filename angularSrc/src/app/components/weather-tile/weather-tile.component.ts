@@ -29,7 +29,6 @@ export class WeatherTileComponent implements OnInit {
             .subscribe(result => {
               this.weather = result.forecast;
               this.dayOne = this.weather[0];
-              this.test = this.dayOne;
           }, error => {
               console.error(error);
           });

@@ -1,13 +1,22 @@
+<div>
+    <a (click)='loadSettings()' class="settings">
+            <!--Users need to be able to navigate to settings management-->
+            <span class="glyphicon glyphicon-menu-hamburger btn btn-lg pull-right"></span>
+            </a>
+</div>
 <div class="mainDiv">
-  <a (click)='loadSettings()'>
-    <!--Users need to be able to navigate to settings management-->
-    <span class="glyphicon glyphicon-menu-hamburger btn btn-lg pull-right"></span>
-  </a>
-    <div id="date"></div>
+    <div class="row" class="top-slide">
+        <div class="col-md-6">
+                <div id="date"></div>
+        </div>
+        <div class="col-md-6" id="weather">
+                <app-weather-tile></app-weather-tile>
+        </div>
+    </div>
 </div>
 <div id="welcome">{{this.message}}</div>
 <div class="feed">
     <ul>
-        <li *ngFor="let element of feeds" class="slide" ><strong>{{element.title}}:</strong> {{element.description}}</li>
+        <li *ngFor="let element of feeds" class="slide" ><strong>{{element.title}}:  </strong> {{element.description}}</li>
     </ul>
 </div>

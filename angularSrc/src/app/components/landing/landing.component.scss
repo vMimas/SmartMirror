@@ -2,17 +2,28 @@ $primary-color: #6EC8C5;
 $secondary-color: #F4822B;
 
 body{
-  font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    z-index: 0
+}
+div{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 #background {
     height: 100vh;
+    z-index: 1;
     background-size: cover;
+    background-attachment: fixed;
     background-image: url("https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80");
 }
 
 .landing-header{
     color: #fff;
+    position: fixed;
+    z-index: 2;
 
 }
 
@@ -35,17 +46,21 @@ p{
 }
 
 .adjust{
-    position: relative;
-    margin-top: 20%;
-    margin-left: 45%;
+    position: fixed;
+    top: 60%;
+    left: 45%;
     .btn{
         background-color: #0A6382;
         color: #fff;
     }
+    z-index: 2;
 }
 
 .bio{
-    background-color: black;
+    background: #00467F;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A5CC82, #00467F);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A5CC82, #00467F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
     text-align: center;
     width: 100%;
     height: 100%;
@@ -65,6 +80,8 @@ p{
     .img-responsive{
         border-radius: 50%;
     }
+    z-index: 10;
+    position: relative;
 }
 
 a{
@@ -75,9 +92,17 @@ a{
     background: url("https://images.unsplash.com/Ys-DBJeX0nE.JPG?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
     background-attachment: fixed;
     height: 400px;
+    z-index: 10;
+    position: relative;
 }
 
 .details {
-    padding: 5em;
-    background-color: rgba(238, 238, 238, 0.185);
+    height: 400px;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); 
+    color: $secondary-color;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 10; 
+    position: relative;
 }

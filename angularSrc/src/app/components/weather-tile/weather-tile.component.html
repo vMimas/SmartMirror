@@ -1,26 +1,21 @@
-<div class=" maincontainer ">
-<div style=" align-content: center; width: 75%; padding: 20px; margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);  ">
-    <div *ngIf="weather.length > 0" style=" text-align: center; transform: scale(2) translateY(-40px)">
-        <img [src]="this.dayOne.iconLink" alt="">
-        <p>{{this.dayOne.highTemperature | fahrenheit}}</p>
-        <p>{{this.dayOne.utcTime | moment}}</p>
-</div>
-  <p *ngIf="weather.length == 0">Searching...</p>
-  <div *ngIf="weather.length > 0">
-      <table style="width: 100%; text-align: center">
-          <thead>
-          </thead>
-          <tbody>
-              <tr>
-                  <td *ngFor="let forecast of weather | slice:1" >
-                      <img [src]="forecast.iconLink" />
-                      <p>{{ forecast.highTemperature | fahrenheit }}F</p>
-                      <p>{{ forecast.utcTime | moment }}</p>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
 
-    </div>
+<div class="mainContainer">
+    <div *ngIf="weather.length > 0" class="pull-right">
+        <img class="icon-big" [src]="this.dayOne.iconLink" alt="">
+        <p>{{this.weather[0].highTemperature | fahrenheit}} F</p>
+        <p>{{this.weather[0].utcTime | moment}}</p>
 </div>
-</div>
+<p *ngIf="weather.length == 0">Searching...</p>
+<div *ngIf="weather.length > 0">
+<table>
+    <tbody>
+        <tr>
+            <td *ngFor="let forecast of weather | slice:1" >
+                <img [src]="forecast.iconLink" />
+                <p>{{ forecast.highTemperature | fahrenheit }} F</p>
+                <p>{{ forecast.utcTime | moment }}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div> 

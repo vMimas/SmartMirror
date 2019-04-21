@@ -1,12 +1,24 @@
+.icon-big {
+    height: 80px;
+    width: 80px;
+    font-size: 12px;
+    text-align: center; 
+    margin-bottom: 10px;
+}
 
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+.mainContainer { 
+    padding-right: 30px;
+    position: relative;
+    top: 0vh;
+    text-align: center;
+}
 
-  }
-
-.maincontainer{
-color: white;
-transform: rotate(-90deg) scaley(.35) scaleX(.35) translateX(-510px) translateY(-1600px);
-
+table {
+    width: 100%; 
+    text-align: center;
+    font-size: 12px;
+    & img {
+        height: 40;
+        width: 40;
+    }
 }
