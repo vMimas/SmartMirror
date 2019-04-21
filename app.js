@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
+const db = require('config/database');
 
 //Database Setup
 const mongoose = require('mongoose');
@@ -14,7 +15,7 @@ const authRoutes = require('./routes/auth');
 const host = "0.0.0.0";
 const port = process.env.PORT;
 
-mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
+mongoose.connect(db.database, { useNewUrlParser: true });
 mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
 });
