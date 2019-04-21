@@ -51,7 +51,7 @@ p{
     left: 45%;
     .btn{
         background-color: #0A6382;
-        color: #fff; 
+        color: #fff;
     }
     z-index: 2;
 }
@@ -63,14 +63,19 @@ p{
     
     text-align: center;
     width: 100%;
-    height: 400px;
+    height: 100%;
     color: #fff;
+    padding-right: 5%;
+    padding-bottom: 30px;
     .thumbnail{
         max-height: 300px;
         height: 300px;
         width: 300px;
         margin-left: 50px;
         color: black;
+        p{
+          font-size: 1em;
+        }
     }
     .img-responsive{
         border-radius: 50%;
