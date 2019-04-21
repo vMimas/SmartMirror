@@ -115,7 +115,7 @@ export class UserService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        //'Authorization':  this.Token
+        'Authorization':  this.Token
       })
     };
 
