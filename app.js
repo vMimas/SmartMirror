@@ -12,7 +12,7 @@ const passport = require('passport');
 const authRoutes = require('./routes/auth');
 
 const host = "0.0.0.0";
-const port = (process.env.PORT || 3000);
+const port = process.env.PORT;
 
 mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
 mongoose.connection.on('connected',  () => {
