@@ -1284,7 +1284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // const appUrl = 'http://127.0.0.1:3000/'
-var appUrl = '/';
+var appUrl = '';
 var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
