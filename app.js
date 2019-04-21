@@ -20,6 +20,9 @@ mongoose.connection.on('connected',  () => {
 });
 
 app.use('/', authRoutes);
+app.get('*', (req,res)=>{
+    res.sendfile(path.join(__dirname + 'public/index.html'));
+});
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 
