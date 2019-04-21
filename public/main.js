@@ -1290,6 +1290,7 @@ var UserService = /** @class */ (function () {
         this.http = http;
     }
     UserService.prototype.register = function (body) {
+        console.log(body);
         return this.http.post(appUrl + 'register', body, {
             observe: 'body',
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().append('Content-Type', 'application/json')
