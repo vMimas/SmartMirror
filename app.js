@@ -12,7 +12,6 @@ const passport = require('passport');
 //Routes
 const authRoutes = require('./routes/auth');
 
-const host = "0.0.0.0";
 const port = process.env.PORT;
 
 mongoose.connect(db.database, { useNewUrlParser: true });
@@ -33,8 +32,8 @@ app.use(bodyparser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
-    // origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
-    // credentials: true
+    origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
+    credentials: true
 }));
 
 //Passport Setup
