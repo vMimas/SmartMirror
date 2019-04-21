@@ -153,7 +153,7 @@ router.delete('/user/:id', passport.authenticate('jwt', {session: false}), (req,
 
 //GET all users as json object
 //FOR TESTING PURPOSES DON'T DELETE
-/**router.get('/user', function(req, res, next){
+router.get('/user', function(req, res, next){
   console.log('Get request for all users');
   UsersDB.find({})
     .exec(function(err, user){
@@ -163,7 +163,7 @@ router.delete('/user/:id', passport.authenticate('jwt', {session: false}), (req,
           res.json(user);
       }
     });
-})**/
+});
 
 //GET user by id
 //For testing
