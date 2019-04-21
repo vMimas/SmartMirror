@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
-const db = require('config/database');
+const db = require('./config/database');
 
 //Database Setup
 const mongoose = require('mongoose');
