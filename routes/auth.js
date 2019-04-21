@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 let UsersDB = require('../models/users');
 
 router.post('/register', (req, res, next)=>{
+  console.log(req.body);
   if(req.body.password.length < 6){
     console.log("Password must be at least six characters long.");
   } else {

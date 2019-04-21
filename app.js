@@ -15,14 +15,14 @@ const authRoutes = require('./routes/auth');
 const host = "0.0.0.0";
 const port = process.env.PORT;
 
-mongoose.connect(db.database);
+mongoose.connect(db.database, { useNewUrlParser: true });
 mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
 });
 
 
 app.get('/', (req,res)=>{
-    res.sendfile('public/index.html');
+    res.sendFile('public/index.html');
 });
 
 app.use('/', authRoutes);
