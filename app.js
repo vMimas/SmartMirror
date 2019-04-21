@@ -19,10 +19,13 @@ mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
 });
 
-app.use('/', authRoutes);
-app.get('*', (req,res)=>{
+
+app.get('/', (req,res)=>{
     res.sendfile('public/index.html');
 });
+
+app.use('/', authRoutes);
+
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 
