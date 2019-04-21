@@ -11,6 +11,8 @@ const passport = require('passport');
 //Routes
 const authRoutes = require('./routes/auth');
 
+const port = process.env.PORT || 3000;
+
 mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
 mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
@@ -41,8 +43,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', authRoutes);
-
-const port = 3000;
 
 app.listen(port, ()=>{
     console.log(`App Running on port ${port}`);
