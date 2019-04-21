@@ -3,7 +3,7 @@
     <h1>Settings</h1>
     <div>
       <p>Hello, {{user.username}}!.</p>
-      <p>(Click on a setting to change it.)</p>
+      <p *ngIf="settingsSaved" class="bg-success">Settings saved.</p>
       <form class="form-horizontal">
         <div class="form-group form-group-lg">
           <label class="col-sm-2 control-label" for="username">Username:</label>

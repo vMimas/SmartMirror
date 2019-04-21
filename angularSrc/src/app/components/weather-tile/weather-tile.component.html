@@ -1,0 +1,21 @@
+
+<div class="mainContainer">
+    <div *ngIf="weather.length > 0" class="pull-right">
+        <img class="icon-big" [src]="this.dayOne.iconLink" alt="">
+        <p>{{this.weather[0].highTemperature | fahrenheit}} F</p>
+        <p>{{this.weather[0].utcTime | moment}}</p>
+</div>
+<p *ngIf="weather.length == 0">Searching...</p>
+<div *ngIf="weather.length > 0">
+<table>
+    <tbody>
+        <tr>
+            <td *ngFor="let forecast of weather | slice:1" >
+                <img [src]="forecast.iconLink" />
+                <p>{{ forecast.highTemperature | fahrenheit }} F</p>
+                <p>{{ forecast.utcTime | moment }}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div> 

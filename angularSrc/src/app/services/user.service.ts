@@ -5,7 +5,8 @@ import { User } from '../models/user';
 
 import * as moment from 'moment';
 
-const appUrl = 'http://127.0.0.1:3000/'
+// const appUrl = 'http://127.0.0.1:3000/'
+  const appUrl = '';
 
 @Injectable({
   providedIn: 'root'
