@@ -343,7 +343,8 @@ var routes = [
     { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_4__["RegisterComponent"] },
     { path: '', component: _components_landing_landing_component__WEBPACK_IMPORTED_MODULE_5__["LandingComponent"] },
     { path: 'dashboard', component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__["DashboardComponent"], canActivate: [_guards_authguard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
-    { path: 'settings', component: _components_settings_settings_component__WEBPACK_IMPORTED_MODULE_7__["SettingsComponent"], canActivate: [_guards_authguard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] }
+    { path: 'settings', component: _components_settings_settings_component__WEBPACK_IMPORTED_MODULE_7__["SettingsComponent"], canActivate: [_guards_authguard_service__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
+    { path: '**', component: _components_landing_landing_component__WEBPACK_IMPORTED_MODULE_5__["LandingComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

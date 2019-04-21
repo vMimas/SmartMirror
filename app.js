@@ -20,7 +20,9 @@ mongoose.connection.on('connected',  () => {
 });
 
 app.use(bodyparser.urlencoded({extended: true}));
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyparser.json());
 app.use(cors({
     origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
