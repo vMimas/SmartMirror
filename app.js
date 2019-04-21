@@ -22,7 +22,7 @@ mongoose.connection.on('connected',  () => {
 
 
 app.get('/', (req,res)=>{
-    res.sendFile('public/index.html');
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.use('/', authRoutes);
