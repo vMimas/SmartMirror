@@ -136,17 +136,31 @@ router.get('/user/:id', function(req, res) {
 router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
-    {
-      $set: {email: req.body.email, username: req.body.username, message: req.body.message}
-    },
-    {
-      new: true
-    },
+    { $set: {email: req.body.email, username: req.body.username, message: req.body.message} },
+
+    { new: true },
+
     function(err, updatedUser){
       if(err){
         res.send("Error updating user");
       } else {
         console.log("Success updating user!")
+        res.json(updatedUser);
+      }
+    }
+  )
+});
+
+//UPDATE password
+router.put('/user/:id/password', function(req, res) {
+  UsersDB.findByIdAndUpdate(req.params.id,
+    { $set: {password: User.hashPassword(req.body.password)} },
+    { new: true },
+    function(err, updatedUser){
+      if(err){
+        res.send("Error updating user");
+      } else {
+        console.log('Changed password');
         res.json(updatedUser);
       }
     }

@@ -15,12 +15,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-   this.userService.logout().subscribe(
-     data => {console.log("Data: " + data); },
-     error => console.log("Error: " + error)
-   );  
-   this.router.navigate(['/login']);
-   this.userService.logout();
+    //no need to subscribe.
+    this.userService.logout();
+    this.router.navigate(['/login']);
+
   }
 
   loadDashboard(){

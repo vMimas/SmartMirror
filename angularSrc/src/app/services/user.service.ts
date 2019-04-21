@@ -35,7 +35,8 @@ export class UserService {
     this.Token = null;
     this.User = null;
     localStorage.clear();
-    return this.http.get(appUrl);
+    //This isn't needed, since we redirect to login page.
+    //return this.http.get(appUrl);
   }
 
   storeUserData(token, user, expiresIn){
@@ -105,6 +106,20 @@ export class UserService {
 
     //send updated user to backend
     return this.http.put(appUrl + 'user/' + user.id, user, httpOptions);
+  }
+
+  updatePassword(user: User) : Observable<any>{
+    this.loadToken();
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        //'Authorization':  this.Token
+      })
+    };
+
+    //send updated user to backend
+    return this.http.put(appUrl + 'user/' + user.id + '/password', user, httpOptions);
   }
 
   deleteUser() {
