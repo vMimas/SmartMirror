@@ -1,36 +1,71 @@
 <!-- not worrying about UI appearance yet -->
 <div class='container'>
-    <h1>Settings</h1>
-    <div>
-      <p>Hello, {{user.username}}!.</p>
-      <p *ngIf="settingsSaved" class="bg-success">Settings saved.</p>
-      <form class="form-horizontal">
-        <div class="form-group form-group-lg">
-          <label class="col-sm-2 control-label" for="username">Username:</label>
-          <div class="col-sm-8">
-            <p *ngIf="!editUsername" (click)="onUsernameClick()" class="form-control-static">{{user.username}}</p>
-            <input *ngIf="editUsername" type="text" class="form-control" id="username" name="username" required [(ngModel)]="user.username">
-          </div>
-        </div><!--END form group -->
+  <h1>Hello, {{user.username}}!</h1>
+  <button type="button" (click)="toggleSettings()" class="btn btn-primary btn-block btn-lg">Change Settings</button>
 
-        <div class="form-group form-group-lg">
-          <label class="col-sm-2 control-label" for="email">Email:</label>
-          <div class="col-sm-8">
-            <p *ngIf="!editEmail" (click)="onEmailClick()" class="form-control-static">{{user.email}}</p>
-            <input *ngIf="editEmail" type="text" class="form-control" id="email" name="email" required [(ngModel)]="user.email">
-          </div>
-        </div><!--END form group -->
+  <div *ngIf="showSettings">
+    <form class="form-horizontal">
+      <div class="form-group form-group-lg">
+        <label class="col-sm-2 control-label" for="username">Username:</label>
+        <div class="col-sm-8">
+          <p *ngIf="!editUsername" (click)="onUsernameClick()" class="form-control-static">{{user.username}}</p>
+          <input *ngIf="editUsername" type="text" class="form-control" id="username" name="username" required [(ngModel)]="user.username">
+        </div>
+      </div><!--END form group -->
 
-        <div class="form-group form-group-lg">
-          <label class="col-sm-2 control-label" for="message">Message:</label>
-          <div class="col-sm-8">
-            <p *ngIf="!editMessage" (click)="onMessageClick()" class="form-control-static">{{user.message}}</p>
-            <input *ngIf="editMessage" type="text" class="form-control" id="message" name="message" required [(ngModel)]="user.message">
-          </div>
-        </div><!--END form group -->
+      <div class="form-group form-group-lg">
+        <label class="col-sm-2 control-label" for="email">Email:</label>
+        <div class="col-sm-8">
+          <p *ngIf="!editEmail" (click)="onEmailClick()" class="form-control-static">{{user.email}}</p>
+          <input *ngIf="editEmail" type="text" class="form-control" id="email" name="email" required [(ngModel)]="user.email">
+        </div>
+      </div><!--END form group -->
 
-        <button class="btn btn-primary btn-med" (click)="updateUser()">Save</button>
-      </form>
-      <button type="button" (click)="deleteUser()" class="btn btn-danger btn-med pull-right">Delete Account</button>
-    </div>
+      <div class="form-group form-group-lg">
+        <label class="col-sm-2 control-label" for="message">Message:</label>
+        <div class="col-sm-8">
+          <p *ngIf="!editMessage" (click)="onMessageClick()" class="form-control-static">{{user.message}}</p>
+          <input *ngIf="editMessage" type="text" class="form-control" id="message" name="message" required [(ngModel)]="user.message">
+        </div>
+        <button class="btn btn-primary btn-lg" (click)="updateUser()">Save</button>
+      </div><!--END form group -->
+    </form>
+    <p *ngIf="settingsSaved" (click)="hideAlerts()" class="alert alert-success">Settings saved.</p>
+  </div> <!-- END showSettings -->
+
+  <button type="button" (click)="togglePWedit()" class="btn btn-primary btn-block btn-lg">Change Password</button>
+  <div *ngIf="showPassword">
+    <p *ngIf="pwNew.length < 6">Enter a 6 password at least six (6) characters long.</p>
+    <p *ngIf="(pwNew.length > 5 && pwNew !== pwCheck)">Passwords must match</p>
+    <p *ngIf="(pwNew.length > 5 && pwNew === pwCheck)" class="alert alert-success">Ready!</p>
+    <form>
+      <div class="form-group form-group-lg">
+        <label class="control-label" for="password">Password:</label>
+        <div>
+          <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="pwNew">
+        </div>
+      </div><!--END form group -->
+
+      <div class="form-group form-group-lg">
+        <label class="control-label" for="re-enter">Re-Enter Password:</label>
+        <div>
+          <input type="password" class="form-control" id="re-enter" name="re-enter" required [(ngModel)]="pwCheck">
+        </div>
+
+      </div><!--END form group -->
+      <button *ngIf="(pwNew.length >= 6 && pwNew === pwCheck)" class="btn btn-primary btn-lg" (click)="updatePassword()">Submit</button>
+
+    </form>
+    <p *ngIf="passwordSaved" (click)="hideAlerts()" class="alert alert-success">Password Saved</p>
+  </div><!-- END showPassword -->
+
+  <button type="button" (click)="toggleDelete()" class="btn btn-primary btn-block btn-lg">Delete Account</button>
+  <div *ngIf="showDelAccount">
+    <p>Are you sure you want to <strong>permanently</strong> delete your account?</p>
+    <p class="alert alert-warning"><strong>Warning!</strong> This action cannot be undone.</p>
+
+    <button type="button" (click)="deleteUser()" class="btn btn-danger btn-med btn-block">I'm sure: Permanently Delete Account</button>
+  </div>
+
+
 </div><!--END div container-->

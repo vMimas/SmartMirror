@@ -103,50 +103,36 @@ router.get('/settings', passport.authenticate('jwt', {session: false}), (req, re
   //res.json({user: req.user});
 });
 
-//GET all users as json object
-//FOR TESTING PURPOSES
-router.get('/user', function(req, res, next){
-  console.log('Get request for all users');
-  UsersDB.find({})
-    .exec(function(err, user){
-      if(err){
-          res.send("Error retrieving users");
-      }else{
-          res.json(user);
-      }
-    });
-})
-
-//GET user by id
-router.get('/user/:id', function(req, res) {
-  console.log('Get reqest for single user');
-
-  UsersDB.findById(req.params.id)
-    .exec(function(err, user){
-      if (err){
-        console.log("Error retrieving user");
-      } else {
-        res.json(user);
-      }
-    })//END '.exec'
-});
-
 
 //UPDATE user
 router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
-    {
-      $set: {email: req.body.email, username: req.body.username, message: req.body.message}
-    },
-    {
-      new: true
-    },
+    { $set: {email: req.body.email, username: req.body.username, message: req.body.message} },
+
+    { new: true },
+
     function(err, updatedUser){
       if(err){
         res.send("Error updating user");
       } else {
         console.log("Success updating user!")
+        res.json(updatedUser);
+      }
+    }
+  )
+});
+
+//UPDATE password
+router.put('/user/:id/password', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
+  UsersDB.findByIdAndUpdate(req.params.id,
+    { $set: {password: User.hashPassword(req.body.password)} },
+    { new: true },
+    function(err, updatedUser){
+      if(err){
+        res.send("Error updating user");
+      } else {
+        console.log('Changed password');
         res.json(updatedUser);
       }
     }
@@ -164,5 +150,34 @@ router.delete('/user/:id', passport.authenticate('jwt', {session: false}), (req,
     }
   });
 });
+
+//GET all users as json object
+//FOR TESTING PURPOSES DON'T DELETE
+router.get('/user', function(req, res, next){
+  console.log('Get request for all users');
+  UsersDB.find({})
+    .exec(function(err, user){
+      if(err){
+          res.send("Error retrieving users");
+      }else{
+          res.json(user);
+      }
+    });
+});
+
+//GET user by id
+//For testing
+/**router.get('/user/:id', function(req, res) {
+  console.log('Get reqest for single user');
+
+  UsersDB.findById(req.params.id)
+    .exec(function(err, user){
+      if (err){
+        console.log("Error retrieving user");
+      } else {
+        res.json(user);
+      }
+    })//END '.exec'
+});**/
 
 module.exports = router;

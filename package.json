@@ -5,7 +5,12 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
     "serve": "node app.js"
+=======
+    "serve": "nodemon app.js",
+    "start": "node app"
+>>>>>>> fb30305713a0003d77570297ca69e7deba298881
   },
   "author": "James Hatfield, Lee Dempsey, Tyler Wartzok",
   "license": "ISC",

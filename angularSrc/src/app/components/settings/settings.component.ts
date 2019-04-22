@@ -11,12 +11,20 @@ import { User } from '../../models/user';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  private settingsSaved:boolean = false;
-  private editUsername:boolean = false;
-  private editEmail:boolean = false;
-  private editMessage:boolean = false;
+  private settingsSaved : boolean = false;
+  private passwordSaved : boolean = false;
+
+  private editUsername : boolean = false;
+  private editEmail : boolean = false;
+  private editMessage : boolean = false;
+
+  showSettings : boolean = false;
+  showPassword : boolean = false;
+  showDelAccount : boolean = false;
 
   user : User;
+  pwNew : string = '';
+  pwCheck : string = '';
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -44,18 +52,69 @@ export class SettingsComponent implements OnInit {
     console.log('Account updated.');
   }
 
+  updatePassword(){
+    this.user.password = this.pwNew;
+    console.log(this.user.password);
+    if (this.user.password){
+      this.passwordSaved = true;
+      //forward password to backend
+      this.userService.updatePassword(this.user)
+        .subscribe();
+    //clear values
+    this.pwNew = '';
+    this.pwCheck = '';
+    } else {
+      console.log("No password stored.")
+    }
+  }
+
+  hideAlerts(){
+    //toggle save state
+    this.settingsSaved = false;
+    this.passwordSaved = false;
+  }
+
+  toggleSettings(){
+    this.hideAlerts();
+
+    if(this.showSettings === true){
+      this.showSettings = false;
+    } else {
+      this.showSettings = true;
+    }
+  }
+
+  togglePWedit(){
+    this.hideAlerts();
+
+    if(this.showPassword === true){
+      this.showPassword = false;
+    } else {
+      this.showPassword = true;
+    }
+  }
+  toggleDelete(){
+    this.hideAlerts();
+
+    if(this.showDelAccount === true){
+      this.showDelAccount = false;
+    } else {
+      this.showDelAccount = true;
+    }
+  }
+
   //track edits
   onUsernameClick(){
     this.editUsername = true;
-    this.settingsSaved = false;
+    this.hideAlerts();
   }
   onEmailClick(){
     this.editEmail = true;
-    this.settingsSaved = false;
+    this.hideAlerts();
   }
   onMessageClick(){
     this.editMessage = true;
-    this.settingsSaved = false;
+    this.hideAlerts();
   }
 
 }

@@ -14,15 +14,15 @@ const authRoutes = require('./routes/auth');
 
 const port = process.env.PORT;
 
-mongoose.connect(db.database, { useNewUrlParser: true });
+//mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
+
+//TEST ATLAS
+mongoose.connect("mongodb+srv://dbAdmin:mirrorPasswd@cluster0-ubbfw.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
+
 mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
 });
 
-
-app.get('/', (req,res)=>{
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
 
 app.use('/', authRoutes);
 
@@ -32,9 +32,12 @@ app.use(bodyparser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
-    origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
-    credentials: true
 }));
+
+// for any route, express renders the index.html page in 'dist'
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 //Passport Setup
 app.use(require("express-session")({
@@ -55,4 +58,3 @@ app.use(passport.session());
 app.listen(process.env.PORT, ()=>{
     console.log(`App Running on port ${port}`);
 });
-
