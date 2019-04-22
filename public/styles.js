@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = [[module.i, "/* You can add global styles to this file, and also import other style files */\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9tZWRpYS9yZW1lZGlvcy9EQVRBL1VzZXJzL21lbW9yL0RvY3VtZW50cy9Qcm9qZWN0cy9Db2RlL0ZpbmFsUHJvai9TbWFydE1pcnJvci9hbmd1bGFyU3JjL3NyYy9zdHlsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw4RUFBQSIsImZpbGUiOiJzcmMvc3R5bGVzLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBZb3UgY2FuIGFkZCBnbG9iYWwgc3R5bGVzIHRvIHRoaXMgZmlsZSwgYW5kIGFsc28gaW1wb3J0IG90aGVyIHN0eWxlIGZpbGVzICovIl19 */", '', '']]
+module.exports = [[module.i, "/* You can add global styles to this file, and also import other style files */\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9tZWRpYS9yZW1lZGlvcy9EQVRBL1VzZXJzL21lbW9yL0RvY3VtZW50cy9Qcm9qZWN0cy9Db2RlL0ZpbmFsUHJvai90cnlhZ2Fpbi9TbWFydE1pcnJvci9hbmd1bGFyU3JjL3NyYy9zdHlsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw4RUFBQSIsImZpbGUiOiJzcmMvc3R5bGVzLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBZb3UgY2FuIGFkZCBnbG9iYWwgc3R5bGVzIHRvIHRoaXMgZmlsZSwgYW5kIGFsc28gaW1wb3J0IG90aGVyIHN0eWxlIGZpbGVzICovIl19 */", '', '']]
 
 /***/ }),
 
@@ -557,7 +557,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/remedios/DATA/Users/memor/Documents/Projects/Code/FinalProj/SmartMirror/angularSrc/src/styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! /media/remedios/DATA/Users/memor/Documents/Projects/Code/FinalProj/tryagain/SmartMirror/angularSrc/src/styles.scss */"./src/styles.scss");
 
 
 /***/ })
