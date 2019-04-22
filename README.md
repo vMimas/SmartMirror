@@ -18,4 +18,4 @@ In web browser, navigate to http://localhost:3000/.
 
 ### Build to Production Server
 
-Build angular project to `./public/` by running the command `ng build` from location `./angularSrc/`. Then run production server.
+Build angular project to `./public/` by running the command `ng build --prod` from location `./angularSrc/`. Then run production server.
