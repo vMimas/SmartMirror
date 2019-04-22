@@ -13,7 +13,10 @@ const authRoutes = require('./routes/auth');
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
+//mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
+
+//TEST ATLAS
+mongoose.connect("mongodb+srv://dbAdmin:mirrorPasswd@cluster0-ubbfw.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 
 mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');

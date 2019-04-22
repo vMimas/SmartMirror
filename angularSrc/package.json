@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --output-path ../public"
   },
   "private": true,
   "dependencies": {
@@ -28,8 +29,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.8",
-    "@angular/cli": "~7.2.3",
-    "@angular/compiler-cli": "^7.2.9",
+    "@angular/cli": "^7.2.4",
+    "@angular/compiler-cli": "^7.2.13",
     "@angular/language-service": "~7.2.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",

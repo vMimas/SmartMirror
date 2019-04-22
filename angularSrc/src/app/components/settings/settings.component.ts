@@ -18,9 +18,9 @@ export class SettingsComponent implements OnInit {
   private editEmail : boolean = false;
   private editMessage : boolean = false;
 
-  private showSettings : boolean = false;
-  private showPassword : boolean = false;
-  private showDelAccount : boolean = false;
+  showSettings : boolean = false;
+  showPassword : boolean = false;
+  showDelAccount : boolean = false;
 
   user : User;
   pwNew : string = '';
