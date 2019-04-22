@@ -18,6 +18,7 @@ export class UserService {
   constructor(private http: HttpClient){ }
 
   register(body : any){
+    console.log(body);
     return this.http.post<any>(appUrl + 'register', body, {
       observe: 'body',
       headers: new HttpHeaders().append('Content-Type', 'application/json')
