@@ -4,6 +4,8 @@
 
 Run `npm install` to install dependencies in the root folder. Repeat in `./angularSrc`.
 
+Deployed to: https://smart--mirror.herokuapp.com/
+
 ## Run Production Servers
 
 If you've edited the project, build to production server first.
@@ -16,4 +18,4 @@ In web browser, navigate to http://localhost:3000/.
 
 ### Build to Production Server
 
-Build angular project to `./public/` by running the command `ng build --base-href /` from location `./angularSrc/`. Then run production server.
+Build angular project to `./public/` by running the command `ng build` from location `./angularSrc/`. Then run production server.
