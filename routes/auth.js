@@ -19,6 +19,7 @@ router.post('/register', (req, res, next)=>{
       .then(user => {
         if(user){
           console.log("username is taken");
+          return ("Username is taken");
 
         } else {
           //MONGO: check if email is taken in UsersDB
@@ -26,6 +27,7 @@ router.post('/register', (req, res, next)=>{
             .then(user => {
               if(user){
                 console.log("Email is taken");
+                return ("Email is taken");
 
               } else {
                 addToDB(req, res);

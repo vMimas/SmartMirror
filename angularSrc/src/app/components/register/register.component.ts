@@ -15,6 +15,12 @@ export class RegisterComponent implements OnInit {
   password: new FormControl(null, [Validators.required]),
   username: new FormControl(null, [Validators.required])
  });
+
+ pw : string = '';
+ pwCheck : string = '';
+ email : string = '';
+ username: string = '';
+
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -29,6 +35,9 @@ export class RegisterComponent implements OnInit {
     .subscribe(data => {
       console.log(data);
       this.router.navigate(['/login']);
+      //clear values
+      this.pw = '';
+      this.pwCheck = '';
     }, err => {
       console.log(err);
     });
