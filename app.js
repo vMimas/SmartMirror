@@ -11,28 +11,24 @@ const passport = require('passport');
 //Routes
 const authRoutes = require('./routes/auth');
 
-const port = process.env.PORT;
-
+//For testing with a local db.
 //mongoose.connect("mongodb://localhost/magicMirror", { useNewUrlParser: true });
 
-//TEST ATLAS
 mongoose.connect("mongodb+srv://dbAdmin:mirrorPasswd@cluster0-ubbfw.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 
 mongoose.connection.on('connected',  () => {
     console.log('Connected to Database');
 });
 
-
-app.use('/', authRoutes);
-
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 
+/**app.use(cors({
+    origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
+    credentials: true
+}));**/
+
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(cors({
-}));
-
 // for any route, express renders the index.html page in 'dist'
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
@@ -54,6 +50,13 @@ require('./passport-config');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.listen(process.env.PORT, ()=>{
+//MUST BE AFTER passport
+app.use('/', authRoutes);
+
+//NEED 3000 for testing on localhost.
+const port = process.env.PORT || 3000;
+
+//Leaving as a variable 'port' allows testing on localhost
+app.listen(port, ()=>{
     console.log(`App Running on port ${port}`);
 });

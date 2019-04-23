@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: '', component: LandingComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'settings', component: SettingsComponent, canActivate:[AuthGuard]},
-  {path: '**', component: LandingComponent}
+  {path: '**', redirectTo: '', pathMatch: 'full' } //for any other url, redirectTo base url
 ];
 
 @NgModule({
