@@ -19,7 +19,6 @@ router.post('/register', (req, res, next)=>{
       .then(user => {
         if(user){
           console.log("username is taken");
-          return ("Username is taken");
 
         } else {
           //MONGO: check if email is taken in UsersDB
@@ -27,7 +26,6 @@ router.post('/register', (req, res, next)=>{
             .then(user => {
               if(user){
                 console.log("Email is taken");
-                return ("Email is taken");
 
               } else {
                 addToDB(req, res);
@@ -44,7 +42,9 @@ async function addToDB(req, res){
         email: req.body.email,
         username: req.body.username,
         password: User.hashPassword(req.body.password),
-        message: `Hello, ${req.body.username}`
+        message: `Hello, ${req.body.username}`,
+        displayWeather: true,
+        displayNews: true
     });
 
     try{
@@ -84,6 +84,8 @@ router.post('/login', (req, res, next)=>{
                         username: user.username,
                         email: user.email,
                         message: user.message,
+                        displayWeather: user.displayWeather,
+                        displayNews: user.displayNews
                     }
                 });
             }
@@ -110,7 +112,7 @@ router.get('/settings', passport.authenticate('jwt', {session: false}), (req, re
 router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
-    { $set: {email: req.body.email, username: req.body.username, message: req.body.message} },
+    { $set: {email: req.body.email, username: req.body.username, message: req.body.message, displayWeather: req.body.displayWeather, displayNews: req.body.displayNews} },
 
     { new: true },
 

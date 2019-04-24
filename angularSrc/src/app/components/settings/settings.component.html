@@ -27,8 +27,23 @@
           <p *ngIf="!editMessage" (click)="onMessageClick()" class="form-control-static">{{user.message}}</p>
           <input *ngIf="editMessage" type="text" class="form-control" id="message" name="message" required [(ngModel)]="user.message">
         </div>
-        <button class="btn btn-primary btn-lg" (click)="updateUser()">Save</button>
+
       </div><!--END form group -->
+  <div class="form-group form-group-lg">
+      <label class="col-sm-2 control-label" for="weather">Display Weather:</label>
+      <div class="col-sm-8">
+        <input type="checkbox" name="weather" [(ngModel)]="user.displayWeather">
+      </div>
+  </div><!--END form group -->
+
+  <div class="form-group form-group-lg">
+      <label class="col-sm-2 control-label" for="news">Display News:</label>
+      <div class="col-sm-8">
+        <input type="checkbox" name="news" [(ngModel)]="user.displayNews">
+      </div>
+    <button class="btn btn-primary btn-lg" (click)="updateUser()">Save</button>
+  </div><!--END form group -->
+
     </form>
     <p *ngIf="settingsSaved" (click)="hideAlerts()" class="alert alert-success">Settings saved.</p>
   </div> <!-- END showSettings -->

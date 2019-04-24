@@ -4,6 +4,8 @@ export class User {
   username:string;
   password:string;
   message:string;
+  displayWeather:boolean;
+  displayNews:boolean;
 }
 /** EXAMPLE CODE FOR IMPLEMENTATION
   user : User;

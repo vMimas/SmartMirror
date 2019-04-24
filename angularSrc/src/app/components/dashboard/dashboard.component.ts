@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FeedService } from '../../services/feed.service';
 import { Feed } from '../../models/feed.model';
 import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -21,11 +22,13 @@ export class DashboardComponent implements OnInit {
   reddit: string = "https://www.reddit.com/.rss";
   wallStreet: string = "https://feeds.a.dj.com/rss/RSSWorldNews.xml";
   WPPolitics: string = "http://feeds.washingtonpost.com/rss/politics";
+  user : User;
 
 
   constructor(private userService: UserService, private feed: FeedService, private router: Router) { }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
     this.message = JSON.parse(localStorage.getItem('user')).message;
     this.id = setInterval(this.getDateAndTime, 1000);
     this.feed.getFeeds(this.bbc)
