@@ -35,7 +35,7 @@
 
   <button type="button" (click)="togglePWedit()" class="btn btn-primary btn-block btn-lg">Change Password</button>
   <div *ngIf="showPassword">
-    <p *ngIf="pwNew.length < 6">Enter a 6 password at least six (6) characters long.</p>
+    <p *ngIf="pwNew.length < 6">Enter a password at least six (6) characters long.</p>
     <p *ngIf="(pwNew.length > 5 && pwNew !== pwCheck)">Passwords must match</p>
     <p *ngIf="(pwNew.length > 5 && pwNew === pwCheck)" class="alert alert-success">Ready!</p>
     <form>

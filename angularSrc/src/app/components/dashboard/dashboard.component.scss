@@ -1,6 +1,6 @@
 html, body {
-    margin: 0; 
-    height: 100%; 
+    margin: 0;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -59,7 +59,8 @@ div {
 .feed, ul {
     list-style: none;
     position: relative;
-    bottom: 12vh;
+    //bottom:12vh;
+    bottom: 20vh;
 }
 
 li{
@@ -97,7 +98,7 @@ li{
     100% { opacity: 0; }
   }
 
-  @-webkit-keyframes slide-in { 
+  @-webkit-keyframes slide-in {
     0% {transform: translateX(100%)}
     100% {transform: translateX(0)}
 }

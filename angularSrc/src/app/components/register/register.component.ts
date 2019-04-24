@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
  pwCheck : string = '';
  email : string = '';
  username: string = '';
+ errorMsg : string = '';
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -41,6 +42,7 @@ export class RegisterComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+    this.errorMsg = 'Sorry that person already exists. Try a different username or email.';
   }
 
 }

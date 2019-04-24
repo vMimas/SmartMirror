@@ -20,9 +20,10 @@
                 <input class='form-control'type='password' formControlName="password" [(ngModel)]="pwCheck">
               </div>
 
-          <p class="alert alert-info" *ngIf="pw.length < 6">Enter a 6 password at least six (6) characters long.</p>
+          <p class="alert alert-info" *ngIf="pw.length < 6">Enter a password at least six (6) characters long.</p>
           <p class="alert alert-warning" *ngIf="(pw.length > 5 && pw !== pwCheck)">Passwords must match</p>
           <p class="alert alert-warning" *ngIf="((pw.length > 5 && pw === pwCheck) && !(username.length > 0 && email.length > 1))">Missing email or username.</p>
+          <p *ngIf="errorMsg.length > 0" class="alert alert-danger">{{errorMsg}}</p>
 
           <div class='form-group'>
               <button *ngIf="((pw.length > 5 && pw === pwCheck) && (username.length > 0 && email.length > 1))" class='btn btn-lg btn-primary btn-block' type='button'
