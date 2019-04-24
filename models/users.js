@@ -8,7 +8,8 @@ const UserSchema = new Schema({
     password: {type:String, require:true},
     message: {type:String},
     displayWeather: {type:Boolean},
-    displayNews: {type:Boolean}
+    displayNews: {type:Boolean},
+    displayDate: {type:Boolean}
 
 });
 

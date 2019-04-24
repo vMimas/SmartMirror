@@ -44,7 +44,8 @@ async function addToDB(req, res){
         password: User.hashPassword(req.body.password),
         message: `Hello, ${req.body.username}`,
         displayWeather: true,
-        displayNews: true
+        displayNews: true,
+        displayDate: true
     });
 
     try{
@@ -85,7 +86,8 @@ router.post('/login', (req, res, next)=>{
                         email: user.email,
                         message: user.message,
                         displayWeather: user.displayWeather,
-                        displayNews: user.displayNews
+                        displayNews: user.displayNews,
+                        displayDate: user.displayDate
                     }
                 });
             }
@@ -112,7 +114,7 @@ router.get('/settings', passport.authenticate('jwt', {session: false}), (req, re
 router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
-    { $set: {email: req.body.email, username: req.body.username, message: req.body.message, displayWeather: req.body.displayWeather, displayNews: req.body.displayNews} },
+    { $set: {email: req.body.email, username: req.body.username, message: req.body.message, displayWeather: req.body.displayWeather, displayNews: req.body.displayNews, displayDate: req.body.displayDate} },
 
     { new: true },
 
