@@ -7,6 +7,7 @@ export class User {
   displayWeather:boolean;
   displayNews:boolean;
   displayDate:boolean;
+  feedUrl:string;
 }
 /** EXAMPLE CODE FOR IMPLEMENTATION
   user : User;

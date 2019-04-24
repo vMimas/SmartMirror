@@ -9,7 +9,8 @@ const UserSchema = new Schema({
     message: {type:String},
     displayWeather: {type:Boolean},
     displayNews: {type:Boolean},
-    displayDate: {type:Boolean}
+    displayDate: {type:Boolean},
+    feedUrl: {type:String}
 
 });
 

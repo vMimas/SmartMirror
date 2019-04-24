@@ -45,7 +45,8 @@ async function addToDB(req, res){
         message: `Hello, ${req.body.username}`,
         displayWeather: true,
         displayNews: true,
-        displayDate: true
+        displayDate: true,
+        feedUrl: 'https://feeds.a.dj.com/rss/RSSWorldNews.xml'
     });
 
     try{
@@ -87,7 +88,8 @@ router.post('/login', (req, res, next)=>{
                         message: user.message,
                         displayWeather: user.displayWeather,
                         displayNews: user.displayNews,
-                        displayDate: user.displayDate
+                        displayDate: user.displayDate,
+                        feedUrl: user.feedUrl
                     }
                 });
             }
@@ -114,7 +116,7 @@ router.get('/settings', passport.authenticate('jwt', {session: false}), (req, re
 router.put('/user/:id', passport.authenticate('jwt', {session: false}), (req, res, next)=> {
   console.log('Update a user');
   UsersDB.findByIdAndUpdate(req.params.id,
-    { $set: {email: req.body.email, username: req.body.username, message: req.body.message, displayWeather: req.body.displayWeather, displayNews: req.body.displayNews, displayDate: req.body.displayDate} },
+    { $set: {email: req.body.email, username: req.body.username, message: req.body.message, displayWeather: req.body.displayWeather, displayNews: req.body.displayNews, displayDate: req.body.displayDate, feedUrl: req.body.feedUrl} },
 
     { new: true },
 

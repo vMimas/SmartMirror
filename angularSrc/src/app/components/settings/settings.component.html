@@ -48,8 +48,20 @@
       <div class="col-sm-8">
         <input type="checkbox" name="news" [(ngModel)]="user.displayNews">
       </div>
+  </div><!--END form group -->
+
+  <div class="form-group form-group-lg">
+      <label class="col-sm-2 control-label" for="news">Display News:</label>
+      <div class="col-sm-8">
+        <input type="radio" value="http://feeds.bbci.co.uk/news/rss.xml?edition=us" name="BBC" [(ngModel)]="user.feedUrl" > BBC
+        <input type="radio" value="https://feeds.a.dj.com/rss/RSSWorldNews.xml" name="WallStreet" [(ngModel)]="user.feedUrl" > Wall Street
+        <input type="radio" value="http://podcasts.joerogan.net/feed" name="joeRogan" [(ngModel)]="user.feedUrl" > Joe Rogan
+        <!--<input type="radio" value="https://www.reddit.com/.rss" name="reddit" [(ngModel)]="user.feedUrl" > Reddit-->
+        <input type="radio" value="http://feeds.washingtonpost.com/rss/politics" name="WPPolitics" [(ngModel)]="user.feedUrl" > Washington Post
+      </div>
     <button class="btn btn-primary btn-lg" (click)="updateUser()">Save</button>
   </div><!--END form group -->
+
 
     </form>
     <p *ngIf="settingsSaved" (click)="hideAlerts()" class="alert alert-success">Settings saved.</p>
