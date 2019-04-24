@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     this.user = this.userService.getUser();
     this.message = JSON.parse(localStorage.getItem('user')).message;
     this.id = setInterval(this.getDateAndTime, 1000);
-    this.feed.getFeeds(this.bbc)
+    this.feed.getFeeds(this.wallStreet)
     .subscribe(
       (data) => {
         for(let i = 0; i < 5; i++){
