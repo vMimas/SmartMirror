@@ -7,7 +7,7 @@
 <div class="mainDiv">
     <div class="row" class="top-slide">
         <div class="col-md-6">
-                <div id="date"></div>
+                <div *ngIf="user.displayDate" id="date"></div>
         </div>
         <div class="col-md-6" id="weather">
                 <app-weather-tile *ngIf="user.displayWeather"></app-weather-tile>

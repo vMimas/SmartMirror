@@ -6,6 +6,7 @@ export class User {
   message:string;
   displayWeather:boolean;
   displayNews:boolean;
+  displayDate:boolean;
 }
 /** EXAMPLE CODE FOR IMPLEMENTATION
   user : User;
